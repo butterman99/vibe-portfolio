@@ -29,18 +29,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    }
-});
-
 // Scroll animations
 const observerOptions = {
     threshold: 0.1,
@@ -62,6 +50,25 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('fade-in');
         observer.observe(el);
     });
+});
+
+// Navbar background based on section
+const navbarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const navbar = document.querySelector('.navbar');
+        if (entry.isIntersecting) {
+            if (entry.target.id === 'home') {
+                navbar.classList.remove('dark');
+            } else {
+                navbar.classList.add('dark');
+            }
+        }
+    });
+}, { threshold: 0.5 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('#home, #about, #skills, #projects, #contact');
+    sections.forEach(section => navbarObserver.observe(section));
 });
 
 // Form submission
@@ -158,32 +165,6 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Initialize typing effect
-document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
-        }, 500);
-    }
-});
 
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
@@ -220,7 +201,7 @@ window.addEventListener('scroll', () => {
 const style = document.createElement('style');
 style.textContent = `
     .nav-link.active {
-        color: #4f46e5 !important;
+        color: #fff !important;
     }
     .nav-link.active::after {
         width: 100% !important;
@@ -286,6 +267,100 @@ document.querySelectorAll('.contact-item').forEach(item => {
         });
     }
 });
+
+// Stars Generation
+(function() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const starCount = 50;
+
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        const size = Math.random() * 3 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+        
+        hero.appendChild(star);
+    }
+})();
+
+// 3D Cube Mouse Drag Functionality
+(function() {
+    const cube = document.querySelector('.cube');
+    if (!cube) return;
+
+    let isDragging = false;
+    let startX, startY;
+    let currentX = 0, currentY = 0;
+    let rotationX = 0, rotationY = 0;
+
+    cube.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        cube.classList.add('dragging');
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+
+        rotationY = currentX + deltaX * 0.5;
+        rotationX = currentY - deltaY * 0.5;
+
+        cube.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+            currentX = rotationY;
+            currentY = rotationX;
+            cube.classList.remove('dragging');
+        }
+    });
+
+    // Touch events for mobile
+    cube.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        cube.classList.add('dragging');
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+
+        const deltaX = e.touches[0].clientX - startX;
+        const deltaY = e.touches[0].clientY - startY;
+
+        rotationY = currentX + deltaX * 0.5;
+        rotationX = currentY - deltaY * 0.5;
+
+        cube.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+    });
+
+    document.addEventListener('touchend', () => {
+        if (isDragging) {
+            isDragging = false;
+            currentX = rotationY;
+            currentY = rotationX;
+            cube.classList.remove('dragging');
+        }
+    });
+})();
 
 // Console welcome message
 console.log('%c🎨 개인 포트폴리오에 오신 것을 환영합니다!', 'font-size: 20px; color: #4f46e5; font-weight: bold;');
