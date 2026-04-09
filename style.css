@@ -340,8 +340,19 @@ body {
 }
 
 /* Section Styles */
-#about, #contact {
+#about {
     padding-top: 120px;
+}
+
+#contact {
+    padding-top: 120px;
+    padding-bottom: 120px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #667eea, #764ba2);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 #skills, #projects {
@@ -486,8 +497,16 @@ section {
     overflow: hidden;
 }
 
-.skills .section-title {
+.skills .section-title, #contact .section-title {
     color: white;
+}
+
+#contact .section-title {
+    margin-bottom: 4rem;
+}
+
+#contact .contact-form {
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .skills-grid {
@@ -662,20 +681,60 @@ section {
 
 /* Contact Section */
 .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    text-align: left;
 }
+
+.contact-cube {
+    flex-shrink: 0;
+}
+
+.contact-cube .cube-container {
+    width: 200px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.contact-cube .cube {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotateCube 10s infinite linear;
+}
+
+.contact-cube .cube-face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-cube .cube-face.front  { background: rgba(255, 107, 107, 0.8); transform: translateZ(100px); }
+.contact-cube .cube-face.back   { background: rgba(78, 205, 196, 0.8); transform: rotateY(180deg) translateZ(100px); }
+.contact-cube .cube-face.right { background: rgba(69, 183, 209, 0.8); transform: rotateY(90deg) translateZ(100px); }
+.contact-cube .cube-face.left  { background: rgba(150, 206, 180, 0.8); transform: rotateY(-90deg) translateZ(100px); }
+.contact-cube .cube-face.top   { background: rgba(254, 202, 87, 0.8); transform: rotateX(90deg) translateZ(100px); }
+.contact-cube .cube-face.bottom { background: rgba(255, 159, 243, 0.8); transform: rotateX(-90deg) translateZ(100px); }
 
 .contact-info h3 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #fff;
 }
 
 .contact-info p {
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -690,11 +749,11 @@ section {
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #475569;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .contact-item i {
-    color: #4f46e5;
+    color: #fff;
     width: 20px;
 }
 
@@ -769,6 +828,18 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column;
+        gap: 4rem !important;
+        text-align: left;
+    }
+
+    .contact-cube {
+        order: -1;
+        margin-bottom: 2rem;
+        align-self: center;
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
