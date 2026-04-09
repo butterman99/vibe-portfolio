@@ -29,7 +29,7 @@ body {
 }
 
 .navbar.dark {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 1);
     backdrop-filter: blur(10px);
 }
 
@@ -340,14 +340,19 @@ body {
 }
 
 /* Section Styles */
+#about, #skills, #projects, #contact {
+    padding-top: 120px;
+}
+
 section {
     padding: 80px 0;
 }
 
 .section-title {
     text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
     margin-bottom: 3rem;
     color: #333;
 }
@@ -363,12 +368,14 @@ section {
 }
 
 .about-career {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
     margin-bottom: 3rem;
     padding: 2rem;
-    background: white;
+    background: linear-gradient(135deg, #23a6d5 0%, #23d5ab 100%);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -377,80 +384,66 @@ section {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.career-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.career-image {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.career-icon i {
-    font-size: 2rem;
-    color: white;
+.career-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.about-career h3 {
+.career-text {
+    flex: 1;
+    text-align: left;
+}
+
+.career-text h3 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #333;
+    color: #fff;
 }
 
-.about-career p {
+.career-text p {
     font-size: 1.1rem;
-    color: #64748b;
+    color: #fff;
     line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .about-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     margin-bottom: 3rem;
 }
 
 .detail-section {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #4f46e5;
+    padding: 2rem 0;
+    border-bottom: 1px dashed #cbd5e1;
 }
 
-.detail-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+.detail-section:last-child {
+    border-bottom: none;
 }
 
 .detail-section h4 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #4f46e5;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.detail-section h4::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: #4f46e5;
-    border-radius: 50%;
+    color: #333;
 }
 
 .detail-section p {
     color: #64748b;
-    line-height: 1.7;
-    font-size: 0.95rem;
+    line-height: 1.8;
+    font-size: 1rem;
 }
 
 .about-info {
@@ -737,8 +730,8 @@ section {
         padding: 2rem 0;
     }
 
-    .nav-menu.active {
-        left: 0;
+    .nav-link.active {
+        color: #fff !important;
     }
 
     .nav-toggle {
@@ -749,6 +742,21 @@ section {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2rem;
+    }
+
+    .about-career {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .career-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .career-text {
+        text-align: center;
     }
 
     .hero-image {
@@ -808,7 +816,7 @@ section {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 2.4rem;
     }
 
     .container {
