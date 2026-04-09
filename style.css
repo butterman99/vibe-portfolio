@@ -340,8 +340,13 @@ body {
 }
 
 /* Section Styles */
-#about, #skills, #projects, #contact {
+#about, #projects, #contact {
     padding-top: 120px;
+}
+
+#skills {
+    padding-top: 120px;
+    padding-bottom: 120px;
 }
 
 section {
@@ -472,6 +477,19 @@ section {
 }
 
 /* Skills Section */
+.skills {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #667eea, #764ba2);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.skills .section-title {
+    color: white;
+}
+
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -496,11 +514,34 @@ section {
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.skill-card:nth-child(1) .skill-icon {
+    background: linear-gradient(135deg, #ee7752 0%, #e73c7e 100%);
+}
+
+.skill-card:nth-child(2) .skill-icon {
+    background: linear-gradient(135deg, #e73c7e 0%, #23a6d5 100%);
+}
+
+.skill-card:nth-child(3) .skill-icon {
+    background: linear-gradient(135deg, #23a6d5 0%, #23d5ab 100%);
+}
+
+.skill-card:nth-child(4) .skill-icon {
+    background: linear-gradient(135deg, #23d5ab 0%, #667eea 100%);
+}
+
+.skill-card:nth-child(5) .skill-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.skill-card:nth-child(6) .skill-icon {
+    background: linear-gradient(135deg, #764ba2 0%, #ee7752 100%);
 }
 
 .skill-icon i {
@@ -509,7 +550,9 @@ section {
 }
 
 .skill-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.56rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     margin-bottom: 1rem;
     color: #333;
 }
