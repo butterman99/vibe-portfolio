@@ -845,11 +845,15 @@ section {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background: transparent;
+        background: rgba(0, 0, 0, 0.9);
         width: 100%;
         text-align: center;
         transition: 0.3s;
         padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
     }
 
     .nav-link.active {
